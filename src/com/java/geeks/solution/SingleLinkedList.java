@@ -168,13 +168,48 @@ public class SingleLinkedList {
 			
 	}
 	
+	static int getNode(SingleLinkedList head, int positionFromTail) {
+        Node fastNode = head.root;
+        Node slowNode = head.root;
+        
+        if(head == null){
+            return 0;
+        }
+        else{
+            int llLength = -1;
+            while(fastNode!=null && slowNode != null){
+                slowNode = slowNode.next;
+                fastNode = fastNode.next;
+                if(fastNode == null){
+                    llLength++;
+                    break;
+                }
+                fastNode = fastNode.next;
+                llLength+=2;    
+            }
+            llLength = llLength - positionFromTail;
+            slowNode = head.root;
+            if(llLength < 0){
+                return 0;
+            }
+            while(llLength > 0 && slowNode!=null){
+                slowNode = slowNode.next;
+                llLength--;
+            }
+            return slowNode.data;
+        }
+        
+    }
+    
 	public static void main(String[] args) {
 	SingleLinkedList singleLinkedList2 = new SingleLinkedList();
 	SingleLinkedList singleLinkedList3 = new SingleLinkedList();
 	SingleLinkedList singleLinkedList = new SingleLinkedList();
 	Scanner scanner = new Scanner(System.in);
 	int t = scanner.nextInt();
-	for(int i=0;i<t;i++)
+	/*
+	* This is for merging two linked list
+     for(int i=0;i<t;i++)
 	{
 		 singleLinkedList2 = new SingleLinkedList();
 	    singleLinkedList3 = new SingleLinkedList();
@@ -194,8 +229,26 @@ public class SingleLinkedList {
 		System.out.println("");
 		System.out.println("***Finished************");
 		
-	}
+	}*/
 	
+	/*
+	*
+	*    This is Get Node Value from tail postion
+	*/
+
+	for(int i=0;i<t;i++)
+	{
+		 singleLinkedList2 = new SingleLinkedList();
+	    singleLinkedList3 = new SingleLinkedList();
+		int n = scanner.nextInt();
+		for(int j=0;j<n;j++){
+			singleLinkedList2.insertLast(scanner.nextInt());
+		}
+		singleLinkedList.printLL(singleLinkedList2);
+		int position = scanner.nextInt();
+		System.out.println(singleLinkedList.getNode(singleLinkedList2, position));
+		
+	}
 	
 		scanner.close();
 		/*singleLinkedList.insertFirst(10);
