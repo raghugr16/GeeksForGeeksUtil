@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class SingleLinkedList {
 
-	class Node {
+	static class Node {
 		int data;
 		Node next;
 
@@ -39,6 +39,12 @@ public class SingleLinkedList {
 			}
 			temp.next = node;
 		}
+	}
+	
+	public void insertLast(Node node) {
+		
+		if (this.root == null) 
+			root = node;
 	}
 
 	public void printLL() {
@@ -82,9 +88,6 @@ public class SingleLinkedList {
 		while (curr1 != null && curr2 != null) {
 			if(curr1.data <= curr2.data){
 				while(curr1 != null && curr1.data <= curr2.data){
-					/*if(prev == curr2){
-						prev.next = curr1;
-					}*/
 					prev = curr1;
 					curr1 = curr1.next;
 				}
@@ -168,6 +171,20 @@ public class SingleLinkedList {
 			
 	}
 	
+	static SingleLinkedList removeDuplicates(SingleLinkedList head) {
+        Node dupHead = head.root;
+        while(dupHead!=null){
+            if(dupHead.next==null){
+                break;
+            }else if(dupHead.data == dupHead.next.data){
+                dupHead.next = dupHead.next.next;
+            }else{
+                dupHead = dupHead.next;
+            }
+        }
+        return head;
+    }
+	
 	static int getNode(SingleLinkedList head, int positionFromTail) {
         Node fastNode = head.root;
         Node slowNode = head.root;
@@ -201,12 +218,32 @@ public class SingleLinkedList {
         
     }
     
+    static boolean hasCycle(SingleLinkedList head) {
+        Node slowHead = head.root;
+        Node fastHead = head.root;
+        if(head == null)
+            return false;
+        int count;
+        while(fastHead != null && fastHead.next != null){
+            slowHead = slowHead.next;
+            fastHead = fastHead.next.next;
+            if(slowHead == fastHead){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void swapNodes(Node node1,Node node2){
+    
+    }
+    
 	public static void main(String[] args) {
 	SingleLinkedList singleLinkedList2 = new SingleLinkedList();
 	SingleLinkedList singleLinkedList3 = new SingleLinkedList();
 	SingleLinkedList singleLinkedList = new SingleLinkedList();
-	Scanner scanner = new Scanner(System.in);
-	int t = scanner.nextInt();
+	//Scanner scanner = new Scanner(System.in);
+	//int t = scanner.nextInt();
 	/*
 	* This is for merging two linked list
      for(int i=0;i<t;i++)
@@ -236,21 +273,44 @@ public class SingleLinkedList {
 	*    This is Get Node Value from tail postion
 	*/
 
-	for(int i=0;i<t;i++)
+	/*for(int i=0;i<t;i++)
 	{
 		 singleLinkedList2 = new SingleLinkedList();
-	    singleLinkedList3 = new SingleLinkedList();
 		int n = scanner.nextInt();
 		for(int j=0;j<n;j++){
 			singleLinkedList2.insertLast(scanner.nextInt());
 		}
 		singleLinkedList.printLL(singleLinkedList2);
 		int position = scanner.nextInt();
-		System.out.println(singleLinkedList.getNode(singleLinkedList2, position));
-		
-	}
+		System.out.println(singleLinkedList.hasCycle(singleLinkedList2));
+		singleLinkedList2.insertLast(8);
+		singleLinkedList2.insertLast(11);
+		singleLinkedList2.insertLast(20);
+		singleLinkedList2.insertLast(20);
+		System.out.println(singleLinkedList.hasCycle(singleLinkedList2));
+	}*/
 	
-		scanner.close();
+		singleLinkedList2 = new SingleLinkedList();
+		Node node1 = new Node(1);
+		Node node2 = new Node(2);
+		Node node3 = new Node(3);
+		Node node4 = new Node(1);
+		node1.next = node2;
+		node2.next = node3;
+		node3.next = node4;
+		node4.next = node1;
+		singleLinkedList2.insertLast(node1);
+		
+		System.out.println(singleLinkedList.hasCycle(singleLinkedList2));
+	
+	
+	
+	/***
+	*    Input for find a loop in a LinkedList
+	*		
+	*/
+	
+		//scanner.close();
 		/*singleLinkedList.insertFirst(10);
 		singleLinkedList.insertFirst(20);
 		singleLinkedList.insertFirst(30);

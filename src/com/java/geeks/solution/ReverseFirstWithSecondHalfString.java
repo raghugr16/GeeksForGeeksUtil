@@ -36,15 +36,7 @@ public class ReverseFirstWithSecondHalfString {
         String str = "it";
         System.out.println(str.substring(0,1));
         System.out.println(str.substring(1,2));
-        Stack<Integer> stack = new Stack<>();
-        stack.push(10);
-        stack.push(20);
-        stack.push(30);
-        stack.push(40);
-        
-        while(!stack.isEmpty()){
-        	System.out.println(stack.pop());
-        }
+       
         
     	/*Scanner input = new Scanner(System.in);
         String sentence = input.nextLine();
