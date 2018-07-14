@@ -24,6 +24,7 @@ public class Tree {
 	private Node root;
 	static int preOrderIndex = 0;
 	static int postOrderIndex = 0;
+	static int sum = 0;
 	public Tree(){
 	}
 	
@@ -417,7 +418,7 @@ public class Tree {
 
 	public static void main(String[] args) {
 		
-		/*Tree tree = new Tree();
+		Tree tree = new Tree();
 		tree.insert(10);
 		tree.insert(5);
 		tree.insert(20);
@@ -427,6 +428,10 @@ public class Tree {
 		tree.insert(9);
 		tree.insert(15);
 		tree.insert(25);
+		tree.insert(14);
+		tree.insert(24);
+		tree.insert(30);
+		
 		
 		tree.inOrder();
 		tree.postOrder();
@@ -436,8 +441,9 @@ public class Tree {
 		System.out.println(tree.height());
 		System.out.println(tree.height(25));
 		System.out.println(tree.sumOfTree());
+		tree.leftLeafSum();
 		
-		Tree tree1 = new Tree();
+		/*Tree tree1 = new Tree();
 		tree1.insert(10);
 		tree1.insert(5);
 		tree1.insert(20);
@@ -472,15 +478,41 @@ public class Tree {
 		}
 		scanner.close();
 		tree4.topview();*/
-		Tree tree5 = new Tree();
+		/*Tree tree5 = new Tree();
 		tree5 = tree5.constructBinaryTree();
 		//System.out.println(tree5.lowestCommomAncestorBinaryTree(tree5.root,tree5.getNode(8),tree5.getNode(2)).data);
 		
 		tree5 = tree5.convertToDLL();
-		tree5.printDLL();
+		tree5.printDLL();*/
+
 		
 	}
-	
+	//Need more testing
+	private void leftLeafSum() {
+		if(this.root == null)
+			return;
+		sum = 0;
+		leftLeafSum(this.root);
+		System.out.println("Left leaf Sum = "+sum);
+		
+	}
+
+	private Node leftLeafSum(Node root) {
+		if(root==null){
+			return null;
+		}
+		Node left = leftLeafSum(root.left);
+		Node right = leftLeafSum(root.right);
+		if(left == null &&  right== null)
+			return root;
+		if(left!=null)
+			sum = sum+ left.data;
+		if(right!=null)
+			return null;
+			
+		return null;
+	}
+
 	private void printDLL() {
 		Node temp = this.root;
 		while(temp!= null){
