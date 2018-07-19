@@ -13,11 +13,13 @@ public class Tree {
 		int data;
 		Node left;
 		Node right;
+		int ht;
 		
 		 Node(int data){
 			this.data = data;
 			this.left = null;
 			this.right = null;
+			this.ht =0;
 		}
 	}
 	
@@ -420,6 +422,14 @@ public class Tree {
 		
 		Tree tree = new Tree();
 		tree.insert(10);
+		tree.insert(9);
+		tree.insert(8);
+		tree.insert(7);
+		tree.insert(6);
+		tree.insert(5);
+		tree.insert(4);
+		
+		/*tree.insert(10);
 		tree.insert(5);
 		tree.insert(20);
 		tree.insert(1);
@@ -430,7 +440,7 @@ public class Tree {
 		tree.insert(25);
 		tree.insert(14);
 		tree.insert(24);
-		tree.insert(30);
+		tree.insert(30);*/
 		
 		
 		tree.inOrder();
@@ -485,7 +495,8 @@ public class Tree {
 		tree5 = tree5.convertToDLL();
 		tree5.printDLL();*/
 
-		
+		Tree tree6 = new Tree();
+		tree6.constructBinaryTree();
 	}
 	//Need more testing
 	private void leftLeafSum() {
@@ -577,14 +588,101 @@ public class Tree {
 		
 		Tree tree = new Tree(node3);
 		return tree;*/
-		Node node = new Node(10);
+		/*Node node = new Node(10);
 		node.left = new Node(12);
 		node.left.left	= new Node(25);
 		node.left.right = new Node(30);
 		node.right = new Node(15);
 		node.right.left = new Node(36);
-		Tree tree = new Tree(node);
-		return tree;
+		Tree tree = new Tree(node);*/
+		
+		Tree avlTree = new Tree();
+		avlTree.insertAVL(10);
+		avlTree.insertAVL(5);
+		avlTree.insertAVL(20);
+		avlTree.insertAVL(4);
+		avlTree.insertAVL(25);
+		avlTree.insertAVL(19);
+		avlTree.insertAVL(15);
+		avlTree.insertAVL(17);
+		
+		return avlTree;
+	}
+
+	private void insertAVL(int data) {
+		/*this.root = */
+		this.root = insertAVL(this.root,data);
+	}
+
+	private Node insertAVL(Node root, int data) {
+		if(root == null){
+			root = new Node(data);
+			return root;
+		}
+		if(data<= root.data){
+			//root.height = root.height + 1;
+			root.left = insertAVL(root.left,data);
+		}else{
+			root.right = insertAVL(root.right,data);
+		}
+		int diff = heightOfNode(root.left) - heightOfNode(root.right);
+		if(diff > 1){
+			if(heightOfNode(root.left.left) > heightOfNode(root.left.right)){
+				return rotateRight(root);
+			}else{
+				root.left = rotateLeft(root.left);
+				return rotateRight(root);
+			}
+		}
+		if(diff < -1){
+			if(heightOfNode(root.right.right) > heightOfNode(root.right.left)){
+				return rotateLeft(root);
+			}else{
+				root.right = rotateRight(root.right);
+				return rotateLeft(root);
+			}
+			
+		}
+		root.ht = 1+ max(root.left, root.right);
+		return root;
+	}
+
+	private Node rotateRight(Node root) {
+		Node newRoot = root.left;
+		root.left = newRoot.right;
+		newRoot.right = root;
+		root.ht = max(root.left,root.right)+1;
+		newRoot.ht = max(newRoot.left,newRoot.right)+1;
+		return newRoot;
+	}
+
+	private Node rotateLeft(Node root) {
+		Node newNode = root.right;
+		root.right = newNode.left;
+		newNode.left = root;
+		root.ht = max(root.left,root.right)+1;
+		newNode.ht = max(newNode.left,newNode.right)+1;
+		return newNode;
+	}
+
+	private int heightOfNode(Node root) {
+		if(root == null)
+			return -1;
+		else
+			return root.ht;
 	}
 		
+	private int max(Node left,Node right){
+		if(left == null && right == null)
+			return -1;
+		if(left!=null && right!= null)
+			return (left.ht>=right.ht)?left.ht:right.ht;
+		else if(left == null && right != null){
+			return right.ht;
+		}if(right == null && left != null){
+			return left.ht;
+		}
+		return -1;
+	}
+	
 }
