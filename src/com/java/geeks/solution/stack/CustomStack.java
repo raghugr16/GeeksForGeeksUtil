@@ -1,4 +1,4 @@
-package com.java.geeks.solution;
+package com.java.geeks.solution.stack;
 
 import java.util.Scanner;
 

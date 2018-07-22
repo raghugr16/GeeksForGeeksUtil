@@ -1,4 +1,4 @@
-package com.java.geeks.solution;
+package com.java.geeks.solution.linkedlist;
 
 import java.util.Scanner;
 

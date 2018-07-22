@@ -1,12 +1,15 @@
-package com.java.geeks.solution;
+package com.java.geeks.solution.trees;
 
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
-
+/***
+ * 
+ * @author Raghavendra
+ *	
+ */
 public class Tree {
 	
 	 class Node{
@@ -63,6 +66,9 @@ public class Tree {
 		return root;
 	}
 	
+	/***
+	 *   InOrder Traversal
+	 */
 	
 	public void inOrder(){
 		 System.out.println("In Order Traversal");
@@ -70,6 +76,11 @@ public class Tree {
 		 System.out.println(" ");
 	}
 	
+	/**
+	 *   InOrder Traversal of a Tree
+	 * @param root
+	 * @return root
+	 */
 	private Node inOrder(Node root) {
 		if(root == null){
 			return null;
@@ -80,12 +91,23 @@ public class Tree {
 		return root;
 	}
 
+	
+	/**
+	 * 
+	 */
+	
 	public void postOrder(){
 		System.out.println("Post Order");
 		this.root = postOrder(this.root);
 		System.out.println(" ");
 	}
 	
+	
+	/**
+	 *  Post Order Traversal of the Tree
+	 * @param root
+	 * @return root
+	 */
 	private Node postOrder(Node root) {
 		if(root == null){
 			return null;
@@ -148,6 +170,12 @@ public class Tree {
 		
 	}
 	
+	/**
+	 * Calculate Height of the tree
+	 * 
+	 * @param root
+	 * @return int height of the tree
+	 */
 	private int height(Node root) {
 		if(root == null)
 			return -1;
@@ -169,6 +197,12 @@ public class Tree {
 		return height;
 	}
 	
+	/**
+	 * Calculate Spacific height of the node in a tree
+	 * 
+	 * @param data
+	 * @return int height of the node in a tree
+	 */
 	private int height(int data) {
 		System.out.println("Height of the Node "+data);
 		int height = height(this.root,data);
@@ -202,18 +236,27 @@ public class Tree {
 		this.root = mirror(this.root);
 	}
 
+	/**
+	 * Mirror of the tree
+	 * @param root
+	 * @return Node root of the tree
+	 */
 	private Node mirror(Node root) {
 		if(root == null){
 			return root;
 		}
 		Node left = mirror(root.left);
-		Node right = root.right;mirror(root.right);
+		Node right = mirror(root.right);
 		root.left = right;
 		root.right = left;
 		
 		return root;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	private int sumOfTree() {
 		System.out.println("Sum of all the Node in the Tree");
 		int sum  = sumOfTree(this.root);
@@ -274,7 +317,10 @@ public class Tree {
 	}
 
 	
-
+	/**
+	 * Left View of the tree
+	 * 
+	 */
 	private void leftView() {
 		Queue<Node> queue = new LinkedList<>();
 		if(this.root == null)
@@ -298,6 +344,9 @@ public class Tree {
 		System.out.println(" ");
 	}
 	
+	/**
+	 *    Right view of the tree
+	 */
 	private void rightView() {
 		Queue<Node> queue = new LinkedList<>();
 		if(this.root == null)
@@ -343,6 +392,10 @@ public class Tree {
 		return node;
 	}
 	
+	
+	/**
+	 *     Top view of the tree
+	 */
 	private void topview(){
 		if(root == null)
 			return;
@@ -371,16 +424,15 @@ public class Tree {
 					queue.add(new QNode(node.right, hd+1));
 			}
 		}
-		/*Iterator<Integer> iterator = treeSet.iterator();
-		while(iterator.hasNext()){
-			System.out.print(iterator.next() + " ");
-		}*/
 	}
 	
 	Node lowestCommomAncestorBinarySearch(Node root,Node root1,Node root2){
-		if(root.data > max(root1.data,root2.data ))
-			return lowestCommomAncestorBinarySearch(root.right,root1, root2);
-		else if( root.data < max(root1.data,root2.data))
+		if(root==null){
+			return null;
+		}
+		if(root.data > root1.data && root.data > root2.data )
+			return lowestCommomAncestorBinarySearch(root.left,root1, root2);
+		else if( root.data < root1.data && root.data < root2.data)
 			return lowestCommomAncestorBinarySearch(root.left,root1, root2);
 		else{
 			return root;
@@ -451,7 +503,7 @@ public class Tree {
 		System.out.println(tree.height());
 		System.out.println(tree.height(25));
 		System.out.println(tree.sumOfTree());
-		tree.leftLeafSum();
+		tree.sumLCL();
 		
 		/*Tree tree1 = new Tree();
 		tree1.insert(10);
@@ -496,34 +548,32 @@ public class Tree {
 		tree5.printDLL();*/
 
 		Tree tree6 = new Tree();
-		tree6.constructBinaryTree();
-	}
-	//Need more testing
-	private void leftLeafSum() {
-		if(this.root == null)
-			return;
-		sum = 0;
-		leftLeafSum(this.root);
-		System.out.println("Left leaf Sum = "+sum);
-		
+		tree6 = tree6.constructBinaryTree();
+		System.out.println("Lowest Common Ancestor "+ tree6.lowestCommomAncestorBinarySearch(tree6.root, tree6.getNode(4), tree6.getNode(25)).data);
+		int sum = tree6.sumLCL();
+		System.out.println("Sum = "+ sum);
+		//tree6.inOrder();
+		//tree6.preOrder();
 	}
 
-	private Node leftLeafSum(Node root) {
-		if(root==null){
-			return null;
+	private int sumLCL(){
+		int sum = sumLCL(this.root, false);
+		return sum;
+	}
+	
+	private int sumLCL(Node root,boolean isLeftChild){
+		if(root == null){
+			return 0;
 		}
-		Node left = leftLeafSum(root.left);
-		Node right = leftLeafSum(root.right);
-		if(left == null &&  right== null)
-			return root;
-		if(left!=null)
-			sum = sum+ left.data;
-		if(right!=null)
-			return null;
-			
-		return null;
+		if(root.left == null && root.right == null && isLeftChild){
+			return root.data;
+		}
+		int sum = 0;
+		sum += sumLCL(root.left, true);
+		sum += sumLCL(root.right, false);
+		
+		return sum;
 	}
-
 	private void printDLL() {
 		Node temp = this.root;
 		while(temp!= null){

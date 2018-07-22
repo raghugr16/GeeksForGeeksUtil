@@ -1,6 +1,8 @@
-package com.java.geeks.solution;
+package com.java.geeks.solution.queue;
 
 import java.util.Scanner;
+
+import com.java.geeks.solution.utils.Stack;
 
 public class QueueUsingStack {
 

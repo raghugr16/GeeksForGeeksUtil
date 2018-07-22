@@ -1,4 +1,4 @@
-package com.java.geeks.solution;
+package com.java.geeks.solution.disjoint;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

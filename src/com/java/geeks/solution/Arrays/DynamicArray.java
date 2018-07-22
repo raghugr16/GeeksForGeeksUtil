@@ -1,4 +1,4 @@
-package com.java.geeks.solution;
+package com.java.geeks.solution.Arrays;
 import java.io.*;
 import java.math.*;
 import java.text.*;

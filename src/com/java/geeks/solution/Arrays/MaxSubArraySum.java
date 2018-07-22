@@ -1,4 +1,4 @@
-package com.java.geeks.solution;
+package com.java.geeks.solution.Arrays;
 
 public class MaxSubArraySum {
 	public static void main(String[] args) {

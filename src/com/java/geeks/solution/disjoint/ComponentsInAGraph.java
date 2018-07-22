@@ -1,4 +1,4 @@
-package com.java.geeks.solution;
+package com.java.geeks.solution.disjoint;
 import java.io.*;
 import java.math.*;
 import java.text.*;

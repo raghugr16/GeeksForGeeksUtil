@@ -1,4 +1,4 @@
-package com.java.geeks.solution;
+package com.java.geeks.solution.sort;
 
 import java.util.HashMap;
 import java.util.Map;

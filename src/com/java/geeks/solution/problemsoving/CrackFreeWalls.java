@@ -1,4 +1,4 @@
-package com.java.geeks.solution;
+package com.java.geeks.solution.problemsoving;
 import java.util.Scanner;
 
 public class CrackFreeWalls {

@@ -1,4 +1,4 @@
-package com.java.geeks.solution;
+package com.java.geeks.solution.bitArthematic;
 class countSetBits
 {
     /* Function to get no of set 
