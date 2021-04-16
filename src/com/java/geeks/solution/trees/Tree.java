@@ -495,15 +495,27 @@ public class Tree {
 		tree.insert(30);*/
 		
 		
-		tree.inOrder();
-		tree.postOrder();
-		tree.preOrder();
-		tree.levelOrder();
 		
-		System.out.println(tree.height());
-		System.out.println(tree.height(25));
-		System.out.println(tree.sumOfTree());
-		tree.sumLCL();
+		Tree tree2 = new Tree();
+		tree2.insert(10);
+		tree2.insert(9);
+		tree2.insert(8);
+		tree2.insert(7);
+		tree2.insert(6);
+		tree2.insert(5);
+		tree2.insert(4);
+		
+		Tree test = new Tree();
+		System.out.println(test.isIdentical(tree.root, tree2.root));
+//		tree.inOrder();
+//		tree.postOrder();
+//		tree.preOrder();
+//		tree.levelOrder();
+//		
+//		System.out.println(tree.height());
+//		System.out.println(tree.height(25));
+//		System.out.println(tree.sumOfTree());
+//		tree.sumLCL();
 		
 		/*Tree tree1 = new Tree();
 		tree1.insert(10);
@@ -547,11 +559,11 @@ public class Tree {
 		tree5 = tree5.convertToDLL();
 		tree5.printDLL();*/
 
-		Tree tree6 = new Tree();
-		tree6 = tree6.constructBinaryTree();
-		System.out.println("Lowest Common Ancestor "+ tree6.lowestCommomAncestorBinarySearch(tree6.root, tree6.getNode(4), tree6.getNode(25)).data);
-		int sum = tree6.sumLCL();
-		System.out.println("Sum = "+ sum);
+//		Tree tree6 = new Tree();
+//		tree6 = tree6.constructBinaryTree();
+//		System.out.println("Lowest Common Ancestor "+ tree6.lowestCommomAncestorBinarySearch(tree6.root, tree6.getNode(4), tree6.getNode(25)).data);
+//		int sum = tree6.sumLCL();
+//		System.out.println("Sum = "+ sum);
 		//tree6.inOrder();
 		//tree6.preOrder();
 	}
@@ -733,6 +745,68 @@ public class Tree {
 			return left.ht;
 		}
 		return -1;
+	}
+	
+	int heightGeek(Node node) {
+        // code here 
+        int max = 0;
+        return height(node,max,1);
+        
+    }
+    
+    int height(Node node, Integer max, int count) {
+        if(node == null){
+            return max;
+        }
+        if(max < count){
+            max = count;
+        }
+        if(node.left!=null){
+           max = height(node.left,max,count+1);
+        }
+        if(node.right!=null){
+            max =height(node.right,max,count+1);
+        }
+        return max;
+        
+    }
+    
+    boolean isIdentical(Node root1, Node root2)
+	{
+	    // Code Here
+	    boolean result = true;
+	    return isIdenticalCheck(root1,root2);
+	    
+	}
+	
+	boolean isIdenticalCheck(Node root1, Node root2)
+	{
+	    boolean result;
+	    if(root1 == null && root2 == null){
+	        return true;
+	    }
+	    if(root1 != null && root2 == null){
+	        //result = false;
+	        return false;
+	    }
+	    if(root1 == null && root2 != null){
+	        //result = false;
+	        return false;
+	    }
+	    if(root1 != null && root2 != null){
+	        result = true;
+	        //return true;
+	    }
+	    if(root1.data!=root2.data){
+	        //result = false;
+	        return false;
+	    }
+	    
+	    
+	    result = isIdenticalCheck(root1.left,root2.left);
+	    result = isIdenticalCheck(root1.right,root2.right);
+	    
+	    return result;
 	}
 	
 }
