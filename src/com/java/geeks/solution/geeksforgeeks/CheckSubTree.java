@@ -15,7 +15,14 @@ class Node{
         left=null;
         right=null;
     }
+	@Override
+	public String toString() {
+		return "Node [data=" + data + "]";
+	}
+    
+    
 }
+
 
 public class CheckSubTree {
     
@@ -126,7 +133,7 @@ public class CheckSubTree {
 
 class Tree {
 	
-    public static boolean isSubtree(Node T, Node S) {
+    public boolean isSubtree(Node T, Node S) {
         // add code here.
     	if(T == null && S == null){
             return true;
@@ -180,7 +187,7 @@ class Tree {
         return false;
     }
     
-    public static boolean isSubTreeUtil(Node T, Node S){
+    public boolean isSubTreeUtil(Node T, Node S){
     	if(S == null && T== null){
             return true;
         }
